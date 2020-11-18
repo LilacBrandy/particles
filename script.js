@@ -23,7 +23,8 @@ function drawImage(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     class Particle {
-        constructor(x, y, color, size){
+        
+        constructor(x, y, color, size) {
             this.x = x + canvas.width/2 - png.width * 2,
             this.y = y + canvas.height/2 - png.height * 2,
             this.color = color,
@@ -69,14 +70,15 @@ function drawImage(){
                     this.y -= dy/20;
                 }
             }
-            this.draw()
         }
-    }
+            this.draw()        
+            }
+        }
         function init() {
             particleArray = [];
-
-            for (let y = 0; y2 = data.height; y < y2; y++) {
-                for (let x = 0; x2 = data.width; x2 < x; x++) {
+    
+            for (let y = 0, y2 = data.height; y < y2; y++) {
+                for (let x = 0, x2 = data.width; x < x2; x++) {
                     if (data.data [(y * 4 * data.width) + (x * 4) + 3] > 128) {
                         let postionX = x;
                         let positonY = y;
@@ -86,6 +88,15 @@ function drawImage(){
                         particleArray.push(new Particle(positionX *4, positonY *4, color))
                 }
             }
+        }
+    }    
+        function animate() {
+            requestAnimationFrame (animate);
+            ctx.fillStyle = "rgba(0,0,0,0.5)";
+            ctx.fillRect(0, 0, innerWidth, innerHeight);
+
+            for (let i=0; i < particleArray.length; i++) {
+                particleArray[i].update();
         }
     }
 }
